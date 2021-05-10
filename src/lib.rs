@@ -1,5 +1,6 @@
 pub fn encode(s: &str) -> String {
-  s.chars().fold(String::new(), |mut e,c| {
+  let mut e = String::with_capacity(s.len() * 3);
+  for c in s.chars() {
     match c as u8 {
       45|46|95|126|65..=90|97..=122 => {
         e.push(c as char);
@@ -8,12 +9,12 @@ pub fn encode(s: &str) -> String {
         e.push_str(&format!("%{:02X}", n));
       }
     }
-    e
-  })
+  }
+  e
 }
 
 pub fn decode(s: &str) -> String {
-  s.chars().fold((String::new(), String::new()), |(mut a, mut b),c| {
+  s.chars().fold((String::with_capacity(s.len()), String::with_capacity(3)), |(mut a, mut b),c| {
     if c == '%' || b.len() > 0 {
       if c == '%' { b.clear(); }
       b.push(c);
@@ -57,7 +58,7 @@ mod tests {
     assert_eq!("", decode("%2%%"));
   }
 
-  #[bench]
+/*  #[bench]
   fn hello_world_encode(b: &mut Bencher) {
     b.iter(|| {
       encode("hello world!");
@@ -69,5 +70,5 @@ mod tests {
     b.iter(|| {
       encode("hello%20world%21");
     });
-  }
+  }*/
 }
