@@ -7,7 +7,7 @@ license = "Artistic-2.0"
 description = "Percent encode/decode uri components or strs"
 readme = "README.md"
 repository = "https://github.com/tony-o/rust-uri-pct"
-keywords = ["percent", "encode", "web", "uri", "string", "percent-encode", "uri-encode"]
+keywords = ["percent", "encode", "web", "uri", "string"]
 categories = ["web-programming", "encoding", "decoding"]
 
 [dependencies]
